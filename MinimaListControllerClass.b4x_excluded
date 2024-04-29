@@ -10,8 +10,8 @@ Sub Class_Globals
 	Private ApiVersionIndex As Int
 	Private ControllerIndex As Int
 	Private ElementLastIndex As Int
-	'Private FirstIndex As Int
-	'Private FirstElement As String
+	Private FirstIndex As Int
+	Private FirstElement As String
 End Sub
 
 Public Sub Initialize (req As ServletRequest, resp As ServletResponse)
@@ -20,7 +20,7 @@ Public Sub Initialize (req As ServletRequest, resp As ServletResponse)
 	HRM.Initialize
 End Sub
 
-Private Sub ReturnBadRequest 'ignore
+Private Sub ReturnBadRequest
 	WebApiUtils.ReturnBadRequest(Response)
 End Sub
 
@@ -29,11 +29,11 @@ Private Sub ReturnApiResponse 'ignore
 	WebApiUtils.ReturnHttpResponse(HRM, Response)
 End Sub
 
-Private Sub ReturnMethodNotAllow 'ignore
+Private Sub ReturnMethodNotAllow
 	WebApiUtils.ReturnMethodNotAllow(Response)
 End Sub
 
-Private Sub ReturnErrorUnprocessableEntity 'ignore
+Private Sub ReturnErrorUnprocessableEntity
 	WebApiUtils.ReturnErrorUnprocessableEntity(Response)
 End Sub
 
@@ -45,10 +45,10 @@ Public Sub RouteApi
 	ApiVersionIndex = Main.Element.ApiVersionIndex
 	Version = Elements(ApiVersionIndex)
 	ControllerIndex = Main.Element.ApiControllerIndex
-	'If ElementLastIndex > ControllerIndex Then
-	'	FirstIndex = ControllerIndex + 1
-	'	FirstElement = Elements(FirstIndex)
-	'End If
+	If ElementLastIndex > ControllerIndex Then
+		FirstIndex = ControllerIndex + 1
+		FirstElement = Elements(FirstIndex)
+	End If
 	
 	Select Method
 		Case "GET"
