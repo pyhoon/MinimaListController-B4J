@@ -1,5 +1,5 @@
 ﻿' MinimaList Controller
-' Version 1.06
+' Version 1.07
 Sub Class_Globals
 	Private Request As ServletRequest
 	Private Response As ServletResponse
@@ -25,6 +25,7 @@ Private Sub ReturnBadRequest 'ignore
 End Sub
 
 Private Sub ReturnApiResponse 'ignore
+	HRM.SimpleResponse = Main.SimpleResponse
 	WebApiUtils.ReturnHttpResponse(HRM, Response)
 End Sub
 
@@ -51,7 +52,7 @@ Public Sub RouteApi
 	
 	Select Method
 		Case "GET"
-			'RouteGet
+			RouteGet
 		Case "POST"
 			'RoutePost
 		Case "PUT"
@@ -62,4 +63,26 @@ Public Sub RouteApi
 			Log("Unsupported method: " & Method)
 			ReturnMethodNotAllow
 	End Select
+End Sub
+
+' Snippet: Code_WebApiUtils_03 GET Route
+Private Sub RouteGet
+	Select Version
+		Case "v2"
+			Select ElementLastIndex
+				Case ControllerIndex
+					' Snippet: Code_MinimalListUtils_01 Get All Resources
+					'GetPlural
+					Return
+				Case FirstIndex
+					If IsNumber(FirstElement) = False Then
+						ReturnErrorUnprocessableEntity
+						Return
+					End If
+					' Snippet: Code_MinimalListUtils_02 Get Single Resource
+					'GetSingular(FirstElement)
+					Return
+			End Select
+	End Select
+	ReturnBadRequest
 End Sub
