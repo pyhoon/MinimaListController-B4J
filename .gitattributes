@@ -1,0 +1,5 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+*.bas linguist-language=B4X
+*.bas linguist-detectable=true
